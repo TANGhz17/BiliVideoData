@@ -10,15 +10,11 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import net.sf.json.JSONObject;
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.URL;
 
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
@@ -47,13 +43,27 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     @Override
-    public void onClick(View v) {
+    public void onClick(View v)  {
         String inputText = editText.getText().toString();
-        String BVID= "BV1rV41187HG";
-        String url = "http://api.bilibili.com/x/web-interface/view?bvid=" + BVID;
+        String BVID = null;
+
         switch (v.getId()) {
             case R.id.search:
-                sendRequestWithOkHttp(url);
+                String BV="BV";
+                if ( null == inputText||"".equals(inputText)){
+                    Log.d(TAG, "inputText: 输入框是空的");
+                    Toast.makeText(MainActivity.this,"输入框是空的",Toast.LENGTH_SHORT).show();
+
+                }else if ((inputText.substring(0,2)).equals("BV") &&
+                         inputText.length()==12){
+                    BVID=inputText;
+                    String url = "http://api.bilibili.com/x/web-interface/view?bvid=" + BVID;
+                    sendRequestWithOkHttp(url);
+                }else{
+                    Log.d(TAG, String.valueOf(inputText.length())+"   "+inputText.charAt(0)+inputText.charAt(1));
+                    Log.d(TAG, "inputText: BV号是以'BV'开头的");
+                    Toast.makeText(MainActivity.this, "BV号是以'BV'开头的",Toast.LENGTH_SHORT).show();
+                }
         }
     }
 
@@ -69,7 +79,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     Request request = new Request.Builder()
                             .url(requestUrl)
                             .build();
+                    Log.d(TAG, "run: new Request.Builder");
                     Response response = client.newCall(request).execute();
+                    Log.d(TAG, "run: response from request");
                     String responseData = response.body().string();
 
                     jsonObject = JSONObject.fromObject(responseData);
@@ -77,53 +89,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     showData();
                 } catch (IOException e) {
                     e.printStackTrace();
-                }
-            }
-        }).start();
-    }
-
-    private void sendRequestWithHttpURLConnection(String requestUrl) {
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                JSONObject jsonObject = null;
-                HttpURLConnection connection = null;
-                BufferedReader reader = null;
-                try {
-                    URL url = new URL(requestUrl);
-
-                    connection = (HttpURLConnection) url.openConnection();
-
-                    connection.setRequestMethod("GET");
-                    connection.setConnectTimeout(8000);
-                    connection.setReadTimeout(8000);
-
-                    InputStream inputStream = connection.getInputStream();
-                    reader = new BufferedReader(new InputStreamReader(inputStream));
-                    StringBuilder response = new StringBuilder();
-                    String line;
-                    while ((line = reader.readLine()) != null) {
-                        response.append(line);
-                    }
-
-                    jsonObject = JSONObject.fromObject(response.toString());
-                    jsonStrToJava(jsonObject);
-                    showData();
-
-                } catch (IOException e) {
-                    Log.d(TAG, "run: openConnection()");
-                    e.printStackTrace();
-                } finally {
-                    if (reader != null) {
-                        try {
-                            reader.close();
-                        } catch (IOException e) {
-                            e.printStackTrace();
-                        }
-                    }
-                    if (connection != null) {
-                        connection.disconnect();
-                    }
                 }
             }
         }).start();

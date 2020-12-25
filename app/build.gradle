@@ -48,7 +48,7 @@ dependencies {
     implementation ('net.sf.json-lib:json-lib:2.4:jdk15'){
         exclude group: 'commons-beanutils'
     }
-    implementation 'com.squareup.okhttp3:okhttp:4.10.0-RC1'
+    implementation 'com.squareup.okhttp3:okhttp:4.9.0'
     implementation 'androidx.appcompat:appcompat:1.2.0'
     implementation 'com.google.android.material:material:1.2.1'
     implementation 'androidx.constraintlayout:constraintlayout:2.0.0'
