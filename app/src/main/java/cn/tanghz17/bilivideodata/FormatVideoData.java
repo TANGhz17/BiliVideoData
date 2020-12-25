@@ -1,5 +1,9 @@
 package cn.tanghz17.bilivideodata;
 
+import android.net.Uri;
+
+import java.net.URL;
+
 class FormatVideoData {
     //稿件bvID
     private String bvid;
@@ -8,7 +12,7 @@ class FormatVideoData {
     //稿件分P总数
     private int videos;
     //稿件封面图片url
-    private String pic;
+    private Uri pic;
     //稿件标题
     private String title;
     //稿件发布时间
@@ -41,11 +45,11 @@ class FormatVideoData {
         this.videos=i;
     }
     //稿件封面图片url
-    public String getPic(){
+    public Uri getPic(){
         return pic;
     }
-    public void setPic(String str){
-        this.pic=str;
+    public void setPic(Uri uri){
+        this.pic=uri;
     }
     //稿件标题
     public String getTitle(){
@@ -55,11 +59,11 @@ class FormatVideoData {
         this.title=str;
     }
     //稿件简介
-    public String getPubdate(){
-        return pubdate;
+    public String getDesc(){
+        return desc;
     }
-    public void setPubdate(String str){
-        this.pubdate=str;
+    public void setDesc(String str){
+        this.desc=str;
     }
 
 
