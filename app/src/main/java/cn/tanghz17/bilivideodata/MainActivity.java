@@ -49,16 +49,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public void onClick(View v) {
         String inputText = editText.getText().toString();
-        String BVID;
-        if(inputText!=null){
-            BVID=inputText;
-        }else {
-            BVID = "BV1rV41187HG";
-        }
+        String BVID= "BV1rV41187HG";
         String url = "http://api.bilibili.com/x/web-interface/view?bvid=" + BVID;
         switch (v.getId()) {
             case R.id.search:
-                sendRequestWithHttpURLConnection(url);
+                sendRequestWithOkHttp(url);
         }
     }
 
@@ -68,12 +63,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             @Override
             public void run() {
                 try {
+                    JSONObject jsonObject = null;
+
                     OkHttpClient client = new OkHttpClient();
                     Request request = new Request.Builder()
                             .url(requestUrl)
                             .build();
                     Response response = client.newCall(request).execute();
                     String responseData = response.body().string();
+
+                    jsonObject = JSONObject.fromObject(responseData);
+                    jsonStrToJava(jsonObject);
                     showData();
                 } catch (IOException e) {
                     e.printStackTrace();
@@ -138,7 +138,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         + "BV号：\t " + VideoData.getBvid() + "\n"
                         + "AV号：\t " + VideoData.getAvid() + "\n"
                         //+ "简介：\t " + VideoData.getDesc() + "\n"
-                        + "作者：\b\t" + ownerData.getName() + "\n"
+                        + "UP主：\t " + ownerData.getName() + "\n\n"
                         + "播放量：\t" + statData.getView() + "\n"
                         + "弹幕数：\t" + statData.getDanmaku() + "\n"
                         + "评论数：\t" + statData.getReply() + "\n"
