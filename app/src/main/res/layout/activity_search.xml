@@ -8,6 +8,7 @@
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
+
         <EditText
             android:id="@+id/input_editText"
             android:layout_width="0dp"
@@ -15,7 +16,6 @@
             android:layout_weight="1"
             android:maxLines="1"
             android:singleLine="true"
-            android:selectAllOnFocus="true"
             android:hint="输入视频BV号"/>
         <!--android:text="BV1rV41187HG"-->
 

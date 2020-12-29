@@ -2,6 +2,7 @@ package cn.tanghz17.bilivideodata;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
@@ -30,6 +31,8 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
     public static final FormatVideoData.owner ownerData = new FormatVideoData.owner();
     public static final FormatVideoData.stat statData = new FormatVideoData.stat();
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,6 +51,7 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
 
         switch (v.getId()) {
             case R.id.search:
+
                 String BV="BV";
                 if ( null == inputText||"".equals(inputText)){
                     Log.d(TAG, "inputText: 输入框是空的");
@@ -56,8 +60,23 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
                 }else if ((inputText.substring(0,2)).equals("BV") &&
                         inputText.length()==12){
                     BVID=inputText;
+
                     String url = "http://api.bilibili.com/x/web-interface/view?bvid=" + BVID;
                     sendRequestWithOkHttp(url);
+
+                    SharedPreferences sharedPreferences=getSharedPreferences("BVIDHistory",
+                            MODE_PRIVATE);
+                    SharedPreferences.Editor editor = sharedPreferences.edit();
+
+                    for (int i = 0; i < 5; i++) {
+                        editor.putString("BV"+i , BVID);
+                    }
+
+                    editor.apply();
+
+                    Log.d(TAG, "BVIDHistory: "+sharedPreferences.getString("BV0",""));
+
+
                 }else{
                     Log.d(TAG, String.valueOf(inputText.length())+"   "+inputText.charAt(0)+inputText.charAt(1));
                     Log.d(TAG, "inputText: BV号是以'BV'开头的");
