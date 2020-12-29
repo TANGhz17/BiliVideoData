@@ -17,7 +17,7 @@
             android:singleLine="true"
             android:selectAllOnFocus="true"
             android:hint="输入视频BV号"/>
-            <!--android:text="BV1rV41187HG"-->
+        <!--android:text="BV1rV41187HG"-->
 
         <Button
             android:id="@+id/search"

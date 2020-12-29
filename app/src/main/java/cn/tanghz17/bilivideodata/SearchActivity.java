@@ -20,8 +20,8 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener {
-    private static final String TAG = "MainActivity";
+public class SearchActivity extends AppCompatActivity implements View.OnClickListener{
+    private static final String TAG = "SearchActivity";
     private EditText editText;
     private Button button;
     private TextView textView;
@@ -30,18 +30,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public static final FormatVideoData.owner ownerData = new FormatVideoData.owner();
     public static final FormatVideoData.stat statData = new FormatVideoData.stat();
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_search);
+
         button = (Button) findViewById(R.id.search);
         editText = (EditText) findViewById(R.id.input_editText);
         textView = (TextView) findViewById(R.id.textView);
         imageView = (ImageView) findViewById(R.id.image_video);
         button.setOnClickListener(this);
     }
-
     @Override
     public void onClick(View v)  {
         String inputText = editText.getText().toString();
@@ -52,17 +51,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 String BV="BV";
                 if ( null == inputText||"".equals(inputText)){
                     Log.d(TAG, "inputText: 输入框是空的");
-                    Toast.makeText(MainActivity.this,"输入框是空的",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(SearchActivity.this,"输入框是空的",Toast.LENGTH_SHORT).show();
 
                 }else if ((inputText.substring(0,2)).equals("BV") &&
-                         inputText.length()==12){
+                        inputText.length()==12){
                     BVID=inputText;
                     String url = "http://api.bilibili.com/x/web-interface/view?bvid=" + BVID;
                     sendRequestWithOkHttp(url);
                 }else{
                     Log.d(TAG, String.valueOf(inputText.length())+"   "+inputText.charAt(0)+inputText.charAt(1));
                     Log.d(TAG, "inputText: BV号是以'BV'开头的");
-                    Toast.makeText(MainActivity.this, "BV号是以'BV'开头的",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(SearchActivity.this, "BV号是以'BV'开头的",Toast.LENGTH_SHORT).show();
                 }
         }
     }
