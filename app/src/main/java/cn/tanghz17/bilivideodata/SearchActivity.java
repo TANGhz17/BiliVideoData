@@ -41,6 +41,11 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
         editText = (EditText) findViewById(R.id.input_editText);
         textView = (TextView) findViewById(R.id.textView);
         imageView = (ImageView) findViewById(R.id.image_video);
+
+        SharedPreferences sp=getSharedPreferences("BVIDHistory",
+                MODE_PRIVATE);
+        editText.setText(sp.getString("BV0",""));
+
         button.setOnClickListener(this);
     }
     @Override
@@ -68,19 +73,32 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
                     SharedPreferences.Editor editor = sharedPreferences.edit();
 
                     boolean BVS_flag=false;
+                    int BVS_flag_int = 0;
                     for (int i = 0; i < 5; i++) {
                         if (inputText.equals(sharedPreferences.getString("BV"+i,""))){
                             BVS_flag=true;
+                            BVS_flag_int=i;
 
                         }
                     }
-                    if (BVS_flag==false){
+                    if (!BVS_flag){
                         for (int i = 1; i < 5; i++) {
                             editor.putString("BV"+i,sharedPreferences.getString("BV"+(i-1),""));
 
                         }
                         editor.putString("BV0",inputText);
                         editor.apply();
+                    }else {
+                        if (BVS_flag_int!=0){
+                            String tempSP=sharedPreferences.getString("BV"+BVS_flag_int,"");
+                            for (int i = 1; i <= BVS_flag_int; i++) {
+                                editor.putString("BV"+i,sharedPreferences.getString("BV"+(i-1),""));
+                            }
+                            editor.putString("BV0",tempSP);
+                            editor.apply();
+                        }else {
+                            return;
+                        }
                     }
 
 

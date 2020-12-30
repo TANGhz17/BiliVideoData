@@ -15,7 +15,8 @@
             android:layout_weight="1"
             android:maxLines="1"
             android:singleLine="true"
-            android:hint="输入视频BV号"/>
+            android:hint="输入视频BV号"
+            android:selectAllOnFocus="true"/>
 
         <Button
             android:id="@+id/search"
