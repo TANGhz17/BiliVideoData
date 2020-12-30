@@ -43,6 +43,9 @@ android {
 }
 
 dependencies {
+    //第三方输入框
+    //implementation 'com.carson_ho:SearchLayout:1.0.1'
+
     // https://mvnrepository.com/artifact/net.sf.json-lib/json-lib
     implementation 'commons-beanutils:commons-beanutils:1.9.3'
     implementation ('net.sf.json-lib:json-lib:2.4:jdk15'){

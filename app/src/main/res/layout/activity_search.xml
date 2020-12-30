@@ -8,7 +8,6 @@
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
-
         <EditText
             android:id="@+id/input_editText"
             android:layout_width="0dp"
@@ -17,7 +16,6 @@
             android:maxLines="1"
             android:singleLine="true"
             android:hint="输入视频BV号"/>
-        <!--android:text="BV1rV41187HG"-->
 
         <Button
             android:id="@+id/search"
@@ -26,6 +24,8 @@
             android:text="搜索"
             />
     </LinearLayout>
+
+
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:orientation="vertical"
         android:layout_width="match_parent"

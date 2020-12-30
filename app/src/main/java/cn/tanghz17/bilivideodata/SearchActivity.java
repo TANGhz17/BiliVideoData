@@ -32,7 +32,6 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
     public static final FormatVideoData.stat statData = new FormatVideoData.stat();
 
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -68,11 +67,23 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
                             MODE_PRIVATE);
                     SharedPreferences.Editor editor = sharedPreferences.edit();
 
+                    boolean BVS_flag=false;
                     for (int i = 0; i < 5; i++) {
-                        editor.putString("BV"+i , BVID);
+                        if (inputText.equals(sharedPreferences.getString("BV"+i,""))){
+                            BVS_flag=true;
+
+                        }
+                    }
+                    if (BVS_flag==false){
+                        for (int i = 1; i < 5; i++) {
+                            editor.putString("BV"+i,sharedPreferences.getString("BV"+(i-1),""));
+
+                        }
+                        editor.putString("BV0",inputText);
+                        editor.apply();
                     }
 
-                    editor.apply();
+
 
                     Log.d(TAG, "BVIDHistory: "+sharedPreferences.getString("BV0",""));
 
