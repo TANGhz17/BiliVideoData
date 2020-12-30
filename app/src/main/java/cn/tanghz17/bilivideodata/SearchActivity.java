@@ -155,7 +155,7 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
                         + "弹幕数：\t" + statData.getDanmaku() + "\n"
                         + "评论数：\t" + statData.getReply() + "\n"
                         + "点赞数：\t" + statData.getLike() + "\n"
-                        + "银币数：\t" + statData.getCoin() + "\n"
+                        + "硬币数：\t" + statData.getCoin() + "\n"
                         + "收藏数：\t" + statData.getFavorite() + "\n"
                         + "分享数：\t" + statData.getShare());
                 Log.d(TAG, "showData()| run: ");
