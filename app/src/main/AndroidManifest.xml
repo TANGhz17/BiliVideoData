@@ -3,7 +3,6 @@
     package="cn.tanghz17.bilivideodata"
     android:versionCode="1"
     android:versionName="1.1.3">
-
     <!--网络访问权限-->
     <uses-permission android:name="android.permission.INTERNET" />
     <!--文件读写权限-->

@@ -15,8 +15,11 @@ import android.widget.Toast;
 
 import net.sf.json.JSONObject;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.io.IOException;
 
+import okhttp3.Call;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
@@ -55,7 +58,6 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
 
         switch (v.getId()) {
             case R.id.search:
-
                 String BV="BV";
                 if ( null == inputText||"".equals(inputText)){
                     Log.d(TAG, "inputText: 输入框是空的");
@@ -66,7 +68,21 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
                     BVID=inputText;
 
                     String url = "http://api.bilibili.com/x/web-interface/view?bvid=" + BVID;
-                    sendRequestWithOkHttp(url);
+
+                    HttpUtil.sendOkHttpRequest(url,new okhttp3.Callback(){
+                        @Override
+                            public void onResponse(Call call,Response response) throws IOException{
+                                String responseData = response.body().string();
+                                JSONObject jsonObject = JSONObject.fromObject(responseData);
+                                jsonStrToJava(jsonObject);
+                                showData();
+
+                            }
+                            @Override
+                            public void onFailure(@NotNull Call call, @NotNull IOException e) {
+
+                            }
+                    });
 
                     SharedPreferences sharedPreferences=getSharedPreferences("BVIDHistory",
                             MODE_PRIVATE);
@@ -112,33 +128,6 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
                     Toast.makeText(SearchActivity.this, "BV号是以'BV'开头的",Toast.LENGTH_SHORT).show();
                 }
         }
-    }
-
-
-    private void sendRequestWithOkHttp(String requestUrl) {
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    JSONObject jsonObject = null;
-
-                    OkHttpClient client = new OkHttpClient();
-                    Request request = new Request.Builder()
-                            .url(requestUrl)
-                            .build();
-                    Log.d(TAG, "run: new Request.Builder");
-                    Response response = client.newCall(request).execute();
-                    Log.d(TAG, "run: response from request");
-                    String responseData = response.body().string();
-
-                    jsonObject = JSONObject.fromObject(responseData);
-                    jsonStrToJava(jsonObject);
-                    showData();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-        }).start();
     }
 
     private void showData() {
