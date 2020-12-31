@@ -51,6 +51,7 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
 
         button.setOnClickListener(this);
     }
+
     @Override
     public void onClick(View v)  {
         String inputText = editText.getText().toString();
@@ -72,6 +73,7 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
                     HttpUtil.sendOkHttpRequest(url,new okhttp3.Callback(){
                         @Override
                             public void onResponse(Call call,Response response) throws IOException{
+                                Log.d(TAG, "onResponse: response");
                                 String responseData = response.body().string();
                                 JSONObject jsonObject = JSONObject.fromObject(responseData);
                                 jsonStrToJava(jsonObject);
@@ -80,7 +82,7 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
                             }
                             @Override
                             public void onFailure(@NotNull Call call, @NotNull IOException e) {
-
+                                Log.d(TAG, "onFailure: failure");
                             }
                     });
 
