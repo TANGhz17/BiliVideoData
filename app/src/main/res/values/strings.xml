@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">BiliVideoData</string>
+    <string name="item_video_data">视频数据</string>
+    <string name="item_up_data">up主数据</string>
+    <string name="item_animation_data">番剧数据</string>
+    <string name="item_setting">设置</string>
+
 </resources>

@@ -1,4 +1,4 @@
-package cn.tanghz17.bilivideodata;
+package cn.tanghz17.bilivideodata.ui.VideoData;
 
 import java.io.BufferedReader;
 import java.io.InputStream;

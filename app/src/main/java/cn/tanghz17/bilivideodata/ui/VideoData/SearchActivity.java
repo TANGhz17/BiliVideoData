@@ -1,6 +1,5 @@
-package cn.tanghz17.bilivideodata;
+package cn.tanghz17.bilivideodata.ui.VideoData;
 
-import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.SharedPreferences;
@@ -20,9 +19,8 @@ import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
 
+import cn.tanghz17.bilivideodata.R;
 import okhttp3.Call;
-import okhttp3.OkHttpClient;
-import okhttp3.Request;
 import okhttp3.Response;
 
 public class SearchActivity extends AppCompatActivity implements View.OnClickListener{

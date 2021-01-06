@@ -31,7 +31,7 @@ public class MainActivity extends AppCompatActivity {
             actionBar.setDisplayHomeAsUpEnabled(true);
             actionBar.setHomeAsUpIndicator(R.mipmap.menu_light);
         }
-        nevView.setCheckedItem(R.id.nav_call);
+        nevView.setCheckedItem(R.id.nav_video_data);
         nevView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {

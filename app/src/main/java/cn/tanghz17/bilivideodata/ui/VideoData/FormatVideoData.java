@@ -1,4 +1,4 @@
-package cn.tanghz17.bilivideodata;
+package cn.tanghz17.bilivideodata.ui.VideoData;
 
 import android.net.Uri;
 

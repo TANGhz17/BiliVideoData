@@ -3,19 +3,24 @@
     <group android:checkableBehavior="single">
 
         <item
-            android:id="@+id/nav_call"
-            android:icon="@drawable/call"
-            android:title="Call"/>
+            android:id="@+id/nav_video_data"
+            android:icon="@drawable/ic_bilibili"
+            android:title="@string/item_video_data"/>
 
         <item
-            android:id="@+id/nav_friends"
-            android:icon="@drawable/friends"
-            android:title="Friends"/>
+            android:id="@+id/nav_up_data"
+            android:icon="@drawable/ic_up"
+            android:title="@string/item_up_data"/>
 
         <item
-            android:id="@+id/nav_location"
-            android:icon="@drawable/location"
-            android:title="Location"/>
+            android:id="@+id/nav_animation_data"
+            android:icon="@drawable/ic_animation"
+            android:title="@string/item_animation_data"/>
+
+        <item
+            android:id="@+id/nav_setting"
+            android:icon="@drawable/ic_setting"
+            android:title="@string/item_setting"/>
 
     </group>
 </menu>
