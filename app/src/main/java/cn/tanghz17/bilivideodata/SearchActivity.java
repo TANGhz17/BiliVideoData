@@ -1,5 +1,6 @@
 package cn.tanghz17.bilivideodata;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.SharedPreferences;
@@ -39,6 +40,7 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
+
 
         button = (Button) findViewById(R.id.search);
         editText = (EditText) findViewById(R.id.input_editText);

@@ -51,6 +51,8 @@ dependencies {
     implementation ('net.sf.json-lib:json-lib:2.4:jdk15'){
         exclude group: 'commons-beanutils'
     }
+
+    implementation 'de.hdodenhof:circleimageview:3.1.0'
     implementation 'com.squareup.okhttp3:okhttp:4.9.0'
     implementation 'androidx.appcompat:appcompat:1.2.0'
     implementation 'com.google.android.material:material:1.2.1'
